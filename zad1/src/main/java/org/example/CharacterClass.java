@@ -5,19 +5,18 @@ import lombok.*;
 import java.io.Serializable;
 import java.util.List;
 
-//@ToString
-//@Builder
-//@EqualsAndHashCode
-//@Getter
-//@Setter
-public class AnimalSpecies implements Serializable {
+@ToString
+@Builder
+@EqualsAndHashCode
+@Getter
+@Setter
+public class CharacterClass implements Serializable {
     String name;
 
-    int meanWeight;
-    //int lifeExpectancy;
+    int unlockLevel;
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    List<Character> animals;
+    List<Character> characters;
 }
 

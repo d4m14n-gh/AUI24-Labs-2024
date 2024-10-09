@@ -5,17 +5,17 @@ import lombok.*;
 import java.io.Serializable;
 
 @Builder
-//@ToString
-//@EqualsAndHashCode
+@ToString
+@EqualsAndHashCode
 @Getter
 @Setter
-public class Animal implements Serializable {
+public class Character implements Serializable {
     String name;
 
-    int age;
+    int level;
 
     @ToString.Exclude
-    AnimalSpecies animalSpecies;
+    CharacterClass characterClass;
 
 //    @Override
 //    public String toString() {

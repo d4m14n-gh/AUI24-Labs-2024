@@ -1,4 +1,4 @@
-package org.example;
+package org.example.zad2;
 
 import lombok.*;
 
