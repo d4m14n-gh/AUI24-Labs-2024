@@ -2,21 +2,21 @@ package org.example;
 
 import lombok.*;
 
-@Value
+//@Value
 //@lombok.
-public class CharacterDto implements Comparable<CharacterDto> {
-    String name;
-
-    int level;
-
-    String profession;
-
-    @Override
-    public int compareTo(CharacterDto other) {
-        if (!name.equals(other.name))
-            return name.compareTo(other.name);
-        else if (level!=other.level)
-            return Integer.compare(level, other.level);
-        else return 0;
-    }
-}
+//public class AnimalDto implements Comparable<AnimalDto> {
+//    String name;
+//
+//    int age;
+//
+//    String animalSpecies;
+//
+//    @Override
+//    public int compareTo(AnimalDto other) {
+//        if (!name.equals(other.name))
+//            return name.compareTo(other.name);
+//        else if (age !=other.age)
+//            return Integer.compare(age, other.age);
+//        else return 0;
+//    }
+//}
