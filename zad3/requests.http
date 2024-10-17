@@ -1,0 +1,6 @@
+//character
+GET http://localhost:8080/characters/03668176-f8e7-4246-b0ed-e5d5b017d769
+
+//GET http://localhost:8080/characters/03668176-f8e7-4246-b0ed-e5d5b017d768
+
+

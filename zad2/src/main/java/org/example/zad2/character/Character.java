@@ -1,8 +1,9 @@
-package org.example.zad2;
+package org.example.zad2.character;
 
+import jakarta.persistence.*;
 import lombok.*;
+import org.example.zad2.profession.Profession;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.UUID;
 
@@ -15,17 +16,12 @@ import java.util.UUID;
 @EqualsAndHashCode
 public class Character implements Serializable {
     @Id
-    UUID uuid;
-    String name;
-    int level;
+    private UUID uuid;
+    private String name;
+    private int level;
 
     @ManyToOne
-    @JoinColumn(name = "character_class")
+    @JoinColumn(name = "character_profession")
     @ToString.Exclude //lombok
-    CharacterClass character_class;
-
-//    @Override
-//    public String toString() {
-//        return this.toString();
-//    }
+    private Profession profession;
 }
