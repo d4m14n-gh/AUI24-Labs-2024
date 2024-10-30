@@ -10,30 +10,33 @@ import java.util.UUID;
 
 @Service
 public class CharacterService {
-    private final CharacterRepository characterRepository;
+    private final CharacterRepository repository;
     @Autowired
     public CharacterService(CharacterRepository characterRepository) {
-        this.characterRepository = characterRepository;
+        this.repository = characterRepository;
     }
 
     public void addCharacter(Character character) {
-        characterRepository.save(character);
+        repository.save(character);
     }
 
     public void deleteCharacterById(UUID id) {
-        characterRepository.deleteById(id);
+        repository.deleteById(id);
     }
 
     public Optional<Character> getCharacterById(UUID id) {
-        return characterRepository.findById(id);
+        return repository.findById(id);
     }
 
-    public List<Character> getCharacterByCharacterClass(Profession profession) {
-        return characterRepository.findCharacterByProfession(profession);
+    public List<Character> getCharacterByProfession(Profession profession) {
+        return repository.findCharacterByProfession(profession);
     }
 
     public List<Character> getCharacters() {
-        return characterRepository.findAll();
+        return repository.findAll();
+    }
+    public boolean existsCharacterById(UUID id) {
+        return repository.existsById(id);
     }
 }
 

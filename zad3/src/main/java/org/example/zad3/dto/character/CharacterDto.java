@@ -1,4 +1,4 @@
-package org.example.zad3.dto;
+package org.example.zad3.dto.character;
 
 import lombok.*;
 

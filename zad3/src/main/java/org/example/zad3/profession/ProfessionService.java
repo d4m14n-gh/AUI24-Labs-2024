@@ -19,12 +19,20 @@ public class ProfessionService {
         repository.save(profession);
     }
 
+    public void deleteProfessionById(UUID id) {
+        repository.deleteById(id);
+    }
+
     public List<Profession> getAllProfessions() {
         return repository.findAll();
     }
 
     public Optional<Profession> getProfessionById(UUID id) {
         return repository.findById(id);
+    }
+
+    public boolean existsProfessionById(UUID id) {
+        return repository.existsById(id);
     }
 }
 
