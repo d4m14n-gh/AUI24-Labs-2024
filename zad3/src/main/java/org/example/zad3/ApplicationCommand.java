@@ -39,11 +39,13 @@ public class ApplicationCommand implements CommandLineRunner {
                 case "help":
                     System.out.println("help - list all commands");
                     System.out.println("exit - exit");
+                    System.out.println("list - list all characters by their profession");
                     System.out.println("listCh - list all characters");
                     System.out.println("listP - list all professions");
                     System.out.println("addCh - add a new characters");
                     System.out.println("addP - add a new profession");
                     System.out.println("deleteCh - delete a character");
+                    System.out.println("deleteP - delete a profession");
                     break;
                 case "listCh":
                     characterService.getCharacters().forEach(character -> {
@@ -53,6 +55,15 @@ public class ApplicationCommand implements CommandLineRunner {
                     break;
                 case "listP":
                     professionService.getAllProfessions().forEach(System.out::println);
+                    break;
+                case "list":
+                    professionService.getAllProfessions().forEach(
+                            profession -> {
+                                System.out.println(profession.getName()+" <"+profession.getUuid()+">: ");
+                                var characters = characterService.getCharacterByProfession(profession);
+                                characters.stream().map(character -> "\t- "+character.toString()).forEach(System.out::println);
+                            }
+                    );
                     break;
                 case "addCh": {
                     System.out.println("enter profession uuid: ");
@@ -109,14 +120,37 @@ public class ApplicationCommand implements CommandLineRunner {
                 }
                 case "deleteCh":
                     System.out.println("enter character uuid: ");
+                    UUID characterUuid = null;
                     try {
-                        UUID uuid = UUID.fromString(scanner.nextLine());
-                        characterService.deleteCharacterById(uuid);
+                        characterUuid = UUID.fromString(scanner.nextLine());
                     } catch (IllegalArgumentException e) {
                         System.out.println("!wrong uuid of character");
                         break;
                     }
-                    System.out.println("Successfully deleted character!");
+                    if(characterService.existsCharacterById(characterUuid)){
+                        characterService.deleteCharacterById(characterUuid);
+                        System.out.println("Successfully deleted character!");
+                    }
+                    else{
+                        System.out.println("character not found!");
+                    }
+                    break;
+                case "deleteP":
+                    System.out.println("enter profession uuid: ");
+                    UUID professionUuid = null;
+                    try {
+                        professionUuid = UUID.fromString(scanner.nextLine());
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("!wrong uuid of profession");
+                        break;
+                    }
+                    if(professionService.existsProfessionById(professionUuid)){
+                        professionService.deleteProfessionById(professionUuid);
+                        System.out.println("Successfully deleted profession!");
+                    }
+                    else{
+                        System.out.println("profession not found!");
+                    }
                     break;
                 case "":
                     break;
