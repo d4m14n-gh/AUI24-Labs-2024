@@ -1,25 +1,33 @@
-package org.example.zad3;
+package org.example.characters;
 
 import jakarta.annotation.PostConstruct;
-import org.example.zad3.character.Character;
-import org.example.zad3.character.CharacterService;
-import org.example.zad3.profession.Profession;
-import org.example.zad3.profession.ProfessionService;
+import org.example.characters.character.Character;
+import org.example.characters.character.CharacterService;
+import org.example.characters.dto.Mapper;
+import org.example.characters.dto.profession.ProfessionsDto;
+import org.example.characters.profession.Profession;
+import org.example.characters.profession.ProfessionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 
 @Component
 public class InitializerComponent {
+    private final ProfessionService professionService;
+    private final CharacterService characterService;
+
+    @Autowired
+    @Qualifier("library")
+    private RestTemplate restTemplate;
+
     static class UUIdGenerator {
         final static List<UUID> uuids = new ArrayList<>();
         static final String FILE_NAME = "ids.txt";
@@ -85,47 +93,26 @@ public class InitializerComponent {
         }
     }
     public void addExampleCategoryCollection(Random rng){
-        final String[] professionsNames = {
-                "Warrior",
-                "Mage",
-                "Rogue",
-                "Cleric",
-                "Paladin",
-                "Ranger",
-                "Bard",
-                "Monk",
-                "Druid",
-                "Necromancer"
-        };
-
-        for (String porfessionName : professionsNames){
-            int newUnlockLevel = rng.nextInt(20, 101);
-            UUID uniqueId = UUIdGenerator.get();
-
-            Profession newProfession = new Profession();
-            newProfession.setUuid(uniqueId);
-            newProfession.setUnlockLevel(newUnlockLevel);
-            newProfession.setName(porfessionName);
-
-            professionService.addProfession(newProfession);
-            addExampleCharacterCollection(rng, newProfession);
-        }
+        for (Profession profession: professionService.getAllProfessions())
+            addExampleCharacterCollection(rng, profession);
     }
 
 
-    private final CharacterService characterService;
-    private final ProfessionService professionService;
-
     @Autowired
-    public InitializerComponent(CharacterService characterService, ProfessionService porfessionService) {
+    public InitializerComponent(CharacterService characterService, ProfessionService professionService) {
         this.characterService = characterService;
-        this.professionService = porfessionService;
+        this.professionService = professionService;
     }
 
     @PostConstruct
     public void init() throws Exception {
         Random rng = new Random(1234);
+        //UUIdGenerator.generateAndSave(1000);
         UUIdGenerator.load(); //generateAndSave(1000);
+
+        List<LinkedHashMap> list = restTemplate.getForEntity("/api/professions", List.class).getBody();
+        for(var profession: list)
+            professionService.addProfession(new Profession( UUID.fromString(profession.get("id").toString()), profession.get("name").toString(), new ArrayList<Character>() ));
         addExampleCategoryCollection(rng);
     }
 }

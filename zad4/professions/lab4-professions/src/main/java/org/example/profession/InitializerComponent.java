@@ -1,10 +1,9 @@
-package org.example.zad3;
+package org.example.profession;
 
 import jakarta.annotation.PostConstruct;
-import org.example.zad3.character.Character;
-import org.example.zad3.character.CharacterService;
-import org.example.zad3.profession.Profession;
-import org.example.zad3.profession.ProfessionService;
+
+import org.example.profession.profession.Profession;
+import org.example.profession.profession.ProfessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -55,37 +54,9 @@ public class InitializerComponent {
             }
         }
     }
-    public void addExampleCharacterCollection(Random rng, Profession profession) {
-        final int characterCount = rng.nextInt(5);
-        final String[] randomNames = {
-                "Alice",
-                "Bob",
-                "Charlie",
-                "Diana",
-                "Edward",
-                "Fiona",
-                "George",
-                "Hannah",
-                "Ivan",
-                "Julia"
-        };
 
-        for (int i = 0; i < characterCount; i++) {
-            String newName = randomNames[rng.nextInt(randomNames.length)];
-            int newLevel = rng.nextInt(1, 11);
-            UUID uniqueId = UUIdGenerator.get();
-
-            Character newCharacter = new Character();
-            newCharacter.setUuid(uniqueId);
-            newCharacter.setName(newName);
-            newCharacter.setLevel(newLevel);
-            newCharacter.setProfession(profession);
-
-            characterService.addCharacter(newCharacter);
-        }
-    }
     public void addExampleCategoryCollection(Random rng){
-        final String[] professionsNames = {
+        final String[] professionsNamesList = {
                 "Warrior",
                 "Mage",
                 "Rogue",
@@ -98,34 +69,32 @@ public class InitializerComponent {
                 "Necromancer"
         };
 
-        for (String porfessionName : professionsNames){
+        for (String professionNmae : professionsNamesList){
             int newUnlockLevel = rng.nextInt(20, 101);
             UUID uniqueId = UUIdGenerator.get();
 
             Profession newProfession = new Profession();
             newProfession.setUuid(uniqueId);
             newProfession.setUnlockLevel(newUnlockLevel);
-            newProfession.setName(porfessionName);
+            newProfession.setName(professionNmae);
 
             professionService.addProfession(newProfession);
-            addExampleCharacterCollection(rng, newProfession);
         }
     }
 
 
-    private final CharacterService characterService;
     private final ProfessionService professionService;
 
     @Autowired
-    public InitializerComponent(CharacterService characterService, ProfessionService porfessionService) {
-        this.characterService = characterService;
-        this.professionService = porfessionService;
+    public InitializerComponent(ProfessionService characterClassService) {
+        this.professionService = characterClassService;
     }
 
     @PostConstruct
     public void init() throws Exception {
         Random rng = new Random(1234);
-        UUIdGenerator.load(); //generateAndSave(1000);
+        //UUIdGenerator.generateAndSave(1000);
+        UUIdGenerator.load();
         addExampleCategoryCollection(rng);
     }
 }
