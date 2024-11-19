@@ -16,7 +16,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api")
-public class ProfessionController {
+public class  ProfessionController {
     private final ProfessionService professionService;
     @Autowired
     public ProfessionController(ProfessionService professionService) {

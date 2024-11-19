@@ -8,15 +8,15 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
-public class Zad3Application {
+public class Zad4Application {
 	public static void main(String[] args) {
-		SpringApplication.run(Zad3Application.class, args);
+		SpringApplication.run(Zad4Application.class, args);
 	}
 	@Bean
 	@Qualifier("library")
 	public RestTemplate restTemplate() {
 		return new RestTemplateBuilder()
 				.rootUri("http://localhost:8082/")
-				.build();
+				.build()	;
 	}
 }

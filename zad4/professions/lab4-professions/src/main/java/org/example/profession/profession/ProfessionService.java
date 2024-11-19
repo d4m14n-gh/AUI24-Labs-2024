@@ -25,12 +25,22 @@ public class ProfessionService {
 
     public void addProfession(Profession profession) {
         repository.save(profession);
-        restTemplate.put("/api/professions/{id}", Mapper.toDTO(profession), profession.getUuid());
+        try {
+            restTemplate.put("/api/professions/{id}", Mapper.toDTO(profession), profession.getUuid());
+        }
+        catch (Exception e) {
+
+        }
     }
 
     public void deleteProfessionById(UUID id) {
         repository.deleteById(id);
-        restTemplate.delete("/api/professions/{id}", id);
+        try {
+            restTemplate.delete("/api/professions/{id}", id);
+        }
+        catch (Exception e) {
+
+        }
     }
 
     public List<Profession> getAllProfessions() {

@@ -1,5 +1,5 @@
 ### Get exisiting character
-GET http://localhost:8080/api/characters/d6aa3095-e27d-4225-a2ef-8623400e91d5
+GET http://localhost:8080/api/characters/cca09616-c9d6-48c1-abd1-0f3e28616d4a
 ### Get missing character
 GET http://localhost:8080/api/characters/03668176-f8e7-4246-b0ed-e5d5b017d769
 
@@ -13,7 +13,7 @@ Authorization: Basic a2V2aW46dXNlcnVzZXI=
 {
   "name": "Damian",
   "level": 12,
-  "professionId": "8277e329-acd0-4aa5-8afc-56e93e5a2f2a"
+  "professionId": "2a9ed37c-daf4-4a53-a1c8-7950e89040f1"
 }
 ### Create the same character
 PUT http://localhost:8080/api/characters/3c6f1eb1-8069-44ab-988f-d7fed2b65d87
@@ -23,7 +23,7 @@ Authorization: Basic a2V2aW46dXNlcnVzZXI=
 {
   "name": "DamianExisting",
   "level": 10,
-  "professionId": "8277e329-acd0-4aa5-8afc-56e93e5a2f2a"
+  "professionId": "2a9ed37c-daf4-4a53-a1c8-7950e89040f1"
 }
 ### Create new character, missing profession
 PUT http://localhost:8080/api/characters/3c6f1eb1-8069-44ab-988f-d7fed2b65d88
@@ -44,12 +44,12 @@ Content-Type: application/json
 Authorization: Basic a2V2aW46dXNlcnVzZXI=
 
 {
-"name": "Damian",
-"level": 13,
-"professionId": "8277e329-acd0-4aa5-8afc-56e93e5a2f2a"
+  "name": "Damian",
+  "level": 13,
+  "professionId": "2a9ed37c-daf4-4a53-a1c8-7950e89040f1"
 }
 ### Patch missing character
-PATCH http://localhost:8080/api/characters/3c6f1eb1-8069-44ab-988f-d7fed2b65d89
+PATCH http://localhost:8080/api/characters/3c6f1eb1-8069-44ab-988f-d7fed2b65d87
 Content-Type: application/json
 Authorization: Basic a2V2aW46dXNlcnVzZXI=
 
@@ -62,7 +62,7 @@ Authorization: Basic a2V2aW46dXNlcnVzZXI=
 
 
 ### Delete character
-DELETE http://localhost:8080/api/characters/71f72f25-fcb6-4701-8dcb-4cbd75094c
+DELETE http://localhost:8080/api/characters/3c6f1eb1-8069-44ab-988f-d7fed2b65d87
 
 
 
@@ -75,9 +75,9 @@ GET http://localhost:8080/api/characters
 
 
 ### Get profession
-GET http://localhost:8080/api/professions/8277e329-acd0-4aa5-8afc-56e93e5a2f2a
+GET http://localhost:8080/api/professions/2a9ed37c-daf4-4a53-a1c8-7950e89040f1
 ### Get characters by profession
-GET http://localhost:8080/api/professions/8277e329-acd0-4aa5-8afc-56e93e5a2f2a/characters
+GET http://localhost:8080/api/professions/2a9ed37c-daf4-4a53-a1c8-7950e89040f1/characters
 ### Get missing profession
 GET http://localhost:8080/api/professions/8277e329-acd0-4aa5-8afc-56e93e5a2f2e
 
@@ -113,7 +113,7 @@ Authorization: Basic a2V2aW46dXNlcnVzZXI=
   "unlockLevel": 22
 }
 ### Patch missing profession
-PATCH http://localhost:8080/api/professions/3c6f1eb1-8069-44ab-988f-d7fed2b65d89
+PATCH http://localhost:8080/api/professions/3a6f1eb1-8069-44ab-988f-d7fed2b65d81
 Content-Type: application/json
 Authorization: Basic a2V2aW46dXNlcnVzZXI=
 

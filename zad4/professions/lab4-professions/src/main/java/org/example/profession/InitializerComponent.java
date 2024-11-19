@@ -93,8 +93,7 @@ public class InitializerComponent {
     @PostConstruct
     public void init() throws Exception {
         Random rng = new Random(1234);
-        //UUIdGenerator.generateAndSave(1000);
-        UUIdGenerator.load();
+        UUIdGenerator.load(); //UUIdGenerator.generateAndSave(1000);
         addExampleCategoryCollection(rng);
     }
 }
