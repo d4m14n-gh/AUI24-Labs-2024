@@ -1,0 +1,74 @@
+services:
+
+  professions-db:
+    image: postgres:16.1
+    # restart: always
+    environment:
+      POSTGRES_DB: "professions_db"
+      POSTGRES_USER: "professions_user"
+      POSTGRES_PASSWORD: "professions_password"
+    volumes:
+      - professions-db-data:/var/lib/postgresql/data
+
+  
+  spring-professions:
+    image: d4m14n/aui-6-professions:v1.0
+    container_name: aui-6-spring-professions
+    # restart: always
+    depends_on: 
+      - professions-db
+    environment:
+      CHARACTER_URL: "http://spring-characters:8080"
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://professions-db:5432/professions_db"
+      SPRING_DATASOURCE_DRIVERCLASSNAME: "org.postgresql.Driver"
+      SPRING_DATASOURCE_USERNAME: "professions_user"
+      SPRING_DATASOURCE_PASSWORD: "professions_password"
+      SPRING_JPA_DATABASE_PLATFORM: "org.hibernate.dialect.PostgreSQLDialect"
+    stdin_open: true
+    tty: true
+    ports:
+      - 8081:8080
+
+  spring-characters:
+    image: d4m14n/aui-6-characters:v1.0
+    container_name: aui-6-spring-characters
+    # restart: always
+    depends_on:
+      - spring-professions
+    environment:
+      PROFESSION_URL: http://spring-professions:8080
+    stdin_open: true
+    tty: true
+    ports:
+      - 8082:8080
+
+
+  spring-gateway:
+    image: d4m14n/aui-6-gateway:v1.0
+    container_name: aui-6-spring-gateway
+    # restart: always
+    ports:
+      - 8080:8080
+    depends_on:
+      - spring-professions
+      - spring-characters
+    environment:
+      GATEWAY_HOST: "spring-gateway:8080"
+      CHARACTER_URL: "http://spring-characters:8080"
+      PROFESSION_URL: "http://spring-professions:8080"        
+
+
+  ng-frontend:
+    image: d4m14n/aui-6-frontend-nginx:v1.0
+    container_name: aui-6-ng-frontend
+    # restart: always
+    ports:
+      - 80:80
+    depends_on:
+      - spring-gateway
+
+volumes:
+  # character-db-data:
+  professions-db-data:
+
+    

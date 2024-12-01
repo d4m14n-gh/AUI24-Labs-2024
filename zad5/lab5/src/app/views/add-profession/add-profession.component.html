@@ -1,0 +1,33 @@
+
+    <h2>Add profession</h2>
+    <form [formGroup]="addProfessionForm" (ngSubmit)="onSubmit()">
+        <div>
+          <label for="uuid">Uuid:</label>
+          <br>
+          <input id="uuid" formControlName="uuid"/>
+        </div>
+      
+        <div>
+          <label for="name">Name:</label>
+          <span *ngIf="addProfessionForm.get('name')?.invalid && addProfessionForm.get('name')?.touched">
+             ⚠️Name is required (min. length: 3)
+          </span>
+          <br>
+          <input id="name" formControlName="name"/>
+        </div>
+      
+        <div>
+          <label for="unlockLevel">Unlock level:</label>
+          <span *ngIf="addProfessionForm.get('unlockLevel')?.invalid && addProfessionForm">
+             ⚠️Unlock level must be integer grater or equal 0
+          </span>
+          <br>
+          <input id="unlockLevel" type="number" formControlName="unlockLevel"/>
+        </div>
+
+        <div>
+          <br>
+          <input type="submit" [disabled]="addProfessionForm.invalid" value="Create profession">
+        </div>
+      </form>      
+

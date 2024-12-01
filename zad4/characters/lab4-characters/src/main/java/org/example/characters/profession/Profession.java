@@ -25,9 +25,6 @@ public class Profession implements Serializable {
     @Column(unique = true)
     private String name;
 
-//    @Column(name = "unlock_level")
-//    private int unlockLevel;
-
     @Column(name = "character_list")
     @OneToMany(mappedBy = "profession", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @ToString.Exclude //lombok

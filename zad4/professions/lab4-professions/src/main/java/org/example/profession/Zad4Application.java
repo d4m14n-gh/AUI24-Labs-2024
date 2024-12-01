@@ -17,6 +17,6 @@ public class Zad4Application {
 	public RestTemplate restTemplate() {
 		return new RestTemplateBuilder()
 				.rootUri("http://localhost:8082/")
-				.build()	;
+				.build();
 	}
 }

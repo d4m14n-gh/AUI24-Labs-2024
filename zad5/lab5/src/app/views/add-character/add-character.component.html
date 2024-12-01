@@ -1,0 +1,30 @@
+    <h2>Add Character</h2>
+    <form [formGroup]="addCharacterForm" (ngSubmit)="onSubmit()">
+        <div>
+            <label for="uuid">Uuid:</label>
+            <br>
+            <input id="uuid" formControlName="uuid"/>
+        </div>
+        <div>
+            <label for="name">Name:</label>
+            <span *ngIf="addCharacterForm.get('name')?.invalid && addCharacterForm.get('name')?.touched">
+                ⚠️Name is required (min. length: 3)
+            </span>
+            <br>
+            <input id="name" formControlName="name"/>
+        </div>
+        
+        <div>
+            <label for="level">Level:</label>
+            <span *ngIf="addCharacterForm.get('level')?.invalid && addCharacterForm">
+            ⚠️Level must be integer grater or equal 0
+            </span>
+            <br>
+            <input id="level" type="number" formControlName="level"/>
+        </div>
+
+        <div>
+            <br>
+            <input type="submit" [disabled]="addCharacterForm.invalid" value="Add character">
+        </div>
+    </form>

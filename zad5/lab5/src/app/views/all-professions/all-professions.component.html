@@ -1,0 +1,37 @@
+<section>
+    <h2>All professions</h2>
+    <div class="borderTop">
+        <table *ngIf="professions.length>0">
+            <thead>
+                <th>
+                    🪧 name
+                </th>
+                <th>
+                    #️⃣ id
+                </th>
+                <th>
+                    ⚙️
+                </th>
+            </thead>
+            <tr *ngFor="let profession of professions">
+                <td>
+                    <span class="name" [routerLink]="['/professions', profession.id, 'details']">{{ profession.name }}</span>        
+                </td>
+                <td>        
+                    <span class="name" [routerLink]="['/professions', profession.id, 'details']">{{profession.id}}</span>
+                </td>
+                <td>
+                    <span (click)="removeProfession(profession.id)" class="icon remove">🗑️</span>
+                    <span [routerLink]="['/professions', profession.id, 'edit']" class="icon edit">✏️</span>
+                    <span [routerLink]="['/professions', profession.id, 'details']" class="icon look">🔍</span>
+                </td>
+            </tr>
+        </table>
+        <p *ngIf="professions.length==0">
+            ℹ️ profession not found
+        </p>
+    </div>
+    <div>
+        <app-add-profession></app-add-profession>
+    </div>
+</section>

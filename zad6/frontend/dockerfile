@@ -1,0 +1,15 @@
+FROM nginx:1.23.3
+
+WORKDIR /usr/share/nginx/html
+ENV API_URL=http://123.123.23.2:8081/api
+
+COPY ./browser .
+
+#COPY default.conf /etc/nginx/nginx.conf
+#ADD ./default.conf.template /etc/nginx/templates/default.conf.template
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+EXPOSE 80
+
+# docker build -t d4m14n/aui-6-frontend-nginx:v1.0 .\frontend
+# docker run --rm -p 8080:8080  -dit d4m14n/aui-6-frontend-nginx:v1.0

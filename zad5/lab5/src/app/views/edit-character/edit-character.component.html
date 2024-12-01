@@ -1,0 +1,45 @@
+<section>
+    <h2>Edit Character</h2>
+    <p *ngIf="character" style="font-size: 1.2em;">
+        🪧 {{character.name}}
+        <br>
+        🆔 {{characterId}}
+    </p>
+    <form *ngIf="character" [formGroup]="editCharacterForm" (ngSubmit)="onSubmit()">
+        <div>
+          <label for="name">Name:</label>
+          <span *ngIf="editCharacterForm.get('name')?.invalid && editCharacterForm.get('name')?.touched">
+             ⚠️Name is required (min. length: 3)
+          </span>
+          <br>
+          <input id="name" formControlName="name"/>
+        </div>
+      
+        <div>
+          <label for="level">Level:</label>
+          <span *ngIf="editCharacterForm.get('level')?.invalid && editCharacterForm">
+            ⚠️Level must be integer grater or equal 0
+          </span>
+          <br>
+          <input id="level" type="number" formControlName="level"/>
+        </div>
+
+        <div>
+            <label for="profession">Profession:</label>
+            <br>
+            <select id="profession" formControlName="profession">
+                <option *ngFor="let profession of allProfessions" [value]="profession.id">{{profession.name}}</option>
+            </select>
+            <!-- <br>
+            <input id="profession" type="text" formControlName="profession"/> -->
+        </div>
+        
+        <div>
+          <br>
+          <input type="submit" [disabled]="editCharacterForm.invalid" value="Edit character">
+        </div>
+      </form>  
+    <p *ngIf="!character">
+      ℹ️   character not found
+    </p>
+</section>

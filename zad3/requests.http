@@ -125,7 +125,7 @@ Authorization: Basic a2V2aW46dXNlcnVzZXI=
 
 
 ### Delete profession
-DELETE http://localhost:8080/api/professions/3a6f1eb1-8069-44ab-988f-d7fed2b65d81
+DELETE http://localhost:8080/api/professions/4eb6ee21-9480-4095-b2df-5b8d97c22ed2
 
 
 

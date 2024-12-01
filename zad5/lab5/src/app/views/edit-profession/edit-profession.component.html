@@ -1,0 +1,35 @@
+<section>
+    <h2>Edit profession</h2>
+    <p *ngIf="profession" style="font-size: 1.2em;">
+        🪧 {{profession.name}}
+        <br>
+        🆔 {{professionId}}
+    </p>
+    <form *ngIf="profession" [formGroup]="editProfessionForm" (ngSubmit)="onSubmit()">
+        <div>
+          <label for="name">Name:</label>
+          <span *ngIf="editProfessionForm.get('name')?.invalid && editProfessionForm.get('name')?.touched">
+             ⚠️Name is required (min. length: 3)
+          </span>
+          <br>
+          <input id="name" formControlName="name"/>
+        </div>
+      
+        <div>
+          <label for="unlockLevel">Unlock level:</label>
+          <span *ngIf="editProfessionForm.get('unlockLevel')?.invalid && editProfessionForm">
+            ⚠️Unlock level must be integer grater or equal 0
+          </span>
+          <br>
+          <input id="unlockLevel" type="number" formControlName="unlockLevel"/>
+        </div>
+        
+        <div>
+          <br>
+          <input type="submit" [disabled]="editProfessionForm.invalid" value="Edit profession">
+        </div>
+      </form>  
+    <p *ngIf="!profession">
+      ℹ️   profession not found
+    </p>
+</section>

@@ -1,0 +1,11 @@
+FROM eclipse-temurin:17.0.6_10-jre
+
+
+EXPOSE 8080
+
+COPY ./gateway-1.0-SNAPSHOT.jar /opt/lab-6-gateway/lab6-gateway.jar
+
+CMD ["java", "-jar", "/opt/lab-6-gateway/lab6-gateway.jar"]
+
+# docker build -t d4m14n/aui-6-gateway:v1.0 .\gateway
+# docker run --rm -p 8087:8080  -dit d4m14n/aui-6-gateway:v1.0

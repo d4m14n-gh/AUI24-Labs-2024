@@ -1,0 +1,35 @@
+FROM eclipse-temurin:17.0.6_10-jre
+
+# spring.application.name=lab4-professions
+# spring.datasource.url=jdbc:h2:mem:simple-rpg
+# spring.datasource.driverClassName=org.h2.Driver
+# spring.datasource.username=admin
+# spring.datasource.password=password
+# spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+# spring.jpa.generate-ddl=true
+# spring.jpa.hibernate.ddl-auto=update
+# server.port=8081
+
+
+
+ENV SPRING_APPLICATION_NAME=lab4-professions
+ENV SPRING_DATASOURCE_URL=jdbc:h2:mem:simple-rpg
+ENV SPRING_DATASOURCE_DRIVERCLASSNAME=org.h2.Driver
+ENV SPRING_DATASOURCE_USERNAME=admin
+ENV SPRING_DATASOURCE_PASSWORD=password
+ENV SPRING_JPA_DATABASE_PLATFORM=org.hibernate.dialect.H2Dialect
+ENV SPRING_JPA_GENERATE_DDL=true
+ENV SPRING_JPA_HIBERNATE_DDL_AUTO=update
+ENV SPRING_H2_CONSOLE_enabled=true
+
+# ENV RPG_CHARACTER_URL=http://localhost:8081
+
+ENV SERVER_PORT=8080
+EXPOSE 8080
+
+COPY lab4-professions/target/lab4-professions-1.0-SNAPSHOT.jar /opt/lab-6-professions/lab6-prof.jar
+
+CMD ["java", "-jar", "/opt/lab-6-professions/lab6-prof.jar"]
+
+# docker build -t d4m14n/aui-6-professions:v1.0 .\professions
+# docker run --rm -p 8080:8080  -dit d4m14n/aui-6-professions:v1.0

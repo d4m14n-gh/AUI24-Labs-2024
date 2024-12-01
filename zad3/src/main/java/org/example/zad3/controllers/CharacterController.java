@@ -75,7 +75,7 @@ public class CharacterController {
         }
         else {
             Character character = Mapper.fromDTO(characterDto, id, profession);
-            characterService.deleteCharacterById(id);
+            characterService.deleteCharacterById(id);   
             characterService.addCharacter(character);
             return ResponseEntity.noContent().build();
         }

@@ -1,0 +1,51 @@
+<section>
+    <h2>Profession details</h2>
+    <div *ngIf="profession">
+        <p  style="font-size: 1.2em;">
+            🪧 {{profession.name}}
+            <br>
+            🔓 {{profession.unlockLevel}}
+            <label>
+                lvl
+            </label>
+            <br>
+            🆔 {{professionId}}
+            <br>
+            <span>
+                🧑‍🌾 Characters:
+            </span>
+        </p>
+    </div>
+    <div *ngIf="profession" class="borderTop">
+        <table *ngIf="characters">
+            <thead>
+                <th>
+                    🪧 name
+                </th>
+                <th>
+                    ⚙️
+                </th>
+            </thead>
+            <tr *ngFor="let character of characters">
+                <td>
+                    <span class="name" [routerLink]="['/characters', character.id, 'details']">{{ character.name }}</span>        
+                </td>
+                <td>
+                    <span (click)="removeCharacter(character.id)" class="icon remove">🗑️</span>
+                    <span [routerLink]="['/characters', character.id, 'edit']" class="icon edit">✏️</span>
+                    <span [routerLink]="['/characters', character.id, 'details']" class="icon look">🔍</span>
+                </td>
+            </tr>
+        </table>
+        <label *ngIf="!characters">
+            <br>
+            ℹ️ No character is {{profession.name}}
+        </label>
+    </div>
+    <p *ngIf="!profession">
+        ℹ️ profession not found
+    </p>
+    <div *ngIf="profession">
+        <app-add-character></app-add-character>
+    </div>
+</section>
