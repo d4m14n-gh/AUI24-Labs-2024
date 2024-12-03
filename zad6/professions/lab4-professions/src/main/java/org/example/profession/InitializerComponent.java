@@ -78,7 +78,9 @@ public class InitializerComponent {
             newProfession.setUnlockLevel(newUnlockLevel);
             newProfession.setName(professionNmae);
 
-            professionService.addProfession(newProfession);
+            if (!professionService.existsProfessionById(newProfession.getUuid())){
+                professionService.addProfession(newProfession);
+            }
         }
     }
 

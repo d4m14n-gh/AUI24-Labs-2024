@@ -24,7 +24,12 @@ public class ProfessionService {
     }
 
     public void addProfession(Profession profession) {
-        repository.save(profession);
+        try {
+            repository.save(profession);
+        }
+        catch (Exception e) {
+
+        }
         try {
             restTemplate.put("/api/professions/{id}", Mapper.toDTO(profession), profession.getUuid());
         }
