@@ -17,6 +17,8 @@ public class ApplicationCommand implements CommandLineRunner {
     private ProfessionService professionService;
     @Autowired
     private ApplicationContext appContext;
+    @Autowired
+    private InitializerComponent initializerComponent;
 
     @Override
     public void run(String... args) throws Exception {
@@ -36,6 +38,7 @@ public class ApplicationCommand implements CommandLineRunner {
                     System.out.println("listP - list all professions");
                     System.out.println("addP - add a new profession");
                     System.out.println("deleteP - delete a profession");
+                    System.out.println("initP - init professions");
                     break;
                 case "listP":
                     professionService.getAllProfessions().forEach(System.out::println);
@@ -74,6 +77,9 @@ public class ApplicationCommand implements CommandLineRunner {
                     else{
                         System.out.println("profession not found!");
                     }
+                    break;
+                case "initP":
+                    initializerComponent.init();
                     break;
                 case "":
                     break;

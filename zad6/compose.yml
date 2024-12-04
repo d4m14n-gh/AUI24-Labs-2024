@@ -23,7 +23,6 @@ services:
       - characters-db-data:/var/lib/postgresql/data
     ports:
       - 5433:5432
- 
   
   spring-professions:
     image: d4m14n/aui-6-professions:v1.0
@@ -63,7 +62,6 @@ services:
     tty: true
     ports:
       - 8082:8080
-
 
   spring-gateway:
     image: d4m14n/aui-6-gateway:v1.0

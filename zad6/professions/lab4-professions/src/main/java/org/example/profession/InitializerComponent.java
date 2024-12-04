@@ -37,7 +37,7 @@ public class InitializerComponent {
                     uuids.add(UUID.fromString(line));
                 }
             } catch (IOException e) {
-                System.err.println("error reading: " + e.getMessage());
+                //System.err.println("error reading: " + e.getMessage());
             }
         }
         static void generateAndSave(int cnt){
@@ -92,7 +92,6 @@ public class InitializerComponent {
         this.professionService = characterClassService;
     }
 
-    @PostConstruct
     public void init() throws Exception {
         Random rng = new Random(1234);
         UUIdGenerator.load(); //UUIdGenerator.generateAndSave(1000);

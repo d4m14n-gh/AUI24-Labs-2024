@@ -2,8 +2,8 @@ FROM eclipse-temurin:17.0.6_10-jre
 
 ENV SPRING_APPLICATION_NAME=lab4-professions
 ENV RPG_CHARACTER_URL=http://localhost:8081
-
 ENV CHARACTER_URL="http://spring-characters:8080"
+
 ENV SPRING_DATASOURCE_URL="jdbc:postgresql://localhost:5432/professions_db"
 ENV SPRING_DATASOURCE_DRIVERCLASSNAME="org.postgresql.Driver"
 ENV SPRING_DATASOURCE_USERNAME="professions_user"

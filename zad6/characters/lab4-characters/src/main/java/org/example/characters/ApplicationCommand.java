@@ -11,8 +11,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
-import java.util.Scanner;
-import java.util.UUID;
+import java.util.*;
 
 @Component
 public class ApplicationCommand implements CommandLineRunner {
@@ -22,7 +21,8 @@ public class ApplicationCommand implements CommandLineRunner {
     private ProfessionService professionService;
     @Autowired
     private ApplicationContext appContext;
-
+    @Autowired
+    private  InitializerComponent initializerComponent;
     @Override
     public void run(String... args) throws Exception {
         System.out.println("start write: help to list commands!");
@@ -42,6 +42,7 @@ public class ApplicationCommand implements CommandLineRunner {
                     System.out.println("listCh - list all characters");
                     System.out.println("addCh - add a new characters");
                     System.out.println("deleteCh - delete a character");
+                    System.out.println("initCh - init characters");
                     break;
                 case "listCh":
                     characterService.getCharacters().forEach(character -> {
@@ -93,6 +94,9 @@ public class ApplicationCommand implements CommandLineRunner {
                     System.out.println("character successfully added!");
                     break;
                 }
+                case "initCh":
+                    initializerComponent.init();
+                    break;
                 case "deleteCh":
                     System.out.println("enter character uuid: ");
                     UUID characterUuid = null;
